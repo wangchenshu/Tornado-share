@@ -1,0 +1,68 @@
+* [[http://www.tornadoweb.org/en/stable/index.html#][Tornado]]
+
+Tornado is a Python web framework and asynchronous networking library, 
+originally developed at FriendFeed. By using non-blocking network I/O, 
+Tornado can scale to tens of thousands of open connections, 
+making it ideal for long polling, WebSockets, and other applications 
+that require a long-lived connection to each user.
+
+** Quick links
+
+Download version 4.3: [[https://pypi.python.org/packages/source/t/tornado/tornado-4.3.tar.gz][tornado-4.3.tar.gz]] ( [[http://www.tornadoweb.org/en/stable/releases.html][release notes]] )
+[[https://github.com/tornadoweb/tornado][Source (github)]]
+Mailing lists: [[http://groups.google.com/group/python-tornado][discussion]] and [[http://groups.google.com/group/python-tornado-announce][announcements]]
+[[http://stackoverflow.com/questions/tagged/tornado][Stack Overflow]]
+[[https://github.com/tornadoweb/tornado/wiki/Links][Wiki]]
+
+** Hello, world
+Here is a simple “Hello, world” example web app for Tornado:
+
+#+NAME: hello.py
+#+BEGIN_SRC python
+
+import tornado.ioloop
+import tornado.web
+
+class MainHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.write("Hello, world")
+
+def make_app():
+    return tornado.web.Application([
+        (r"/", MainHandler),
+    ])
+
+if __name__ == "__main__":
+    app = make_app()
+    app.listen(8888)
+    tornado.ioloop.IOLoop.current().start()
+
+#+END_SRC
+
+** Installation
+Automatic installation:
+
+#+NAME:
+#+BEGIN_SRC
+
+pip install tornado
+
+#+END_SRC
+
+Tornado is listed in PyPI and can be installed with pip or easy_install. 
+Note that the source distribution includes demo applications that are not 
+present when Tornado is installed in this way, so you may wish to download 
+a copy of the source tarball as well.
+
+Manual installation: Download [[https://pypi.python.org/packages/source/t/tornado/tornado-4.3.tar.gz][tornado-4.3.tar.gz]]:
+
+#+NAME:
+#+BEGIN_SRC
+
+tar xvzf tornado-4.3.tar.gz
+cd tornado-4.3
+python setup.py build
+sudo python setup.py install
+
+#+END_SRC
+The Tornado source code is hosted on [[https://github.com/tornadoweb/tornado][GitHub]].
